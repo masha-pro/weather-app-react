@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import SearchBar from "./SearchBar";
 import Weather from "./Weather";
 import Footer from "./Footer";
 
@@ -11,7 +10,6 @@ root.render(
   <React.StrictMode>
     <div className="container">
       <div className="weather-container">
-        <SearchBar />
         <Weather />
       </div>
       <Footer />
