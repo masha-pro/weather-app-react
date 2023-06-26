@@ -1,26 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Weather.css";
+import axios from "axios";
 
 export default function WeatherSummary() {
-  let weatherData = {
-    city: "Kharkiv",
-    temperature: 27,
-    date: "Monday 15:00",
-    description: "few clouds",
-    imgUrl:
-      "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png",
-    feelsLike: 25,
-    wind: 14,
-    humidity: 31,
-    pressure: 1016,
-    maxTemp: 27,
-    minTemp: 15,
-  };
+  let [city, setCity] = useState("Kharkiv");
+  let [weather, setWeather] = useState("");
+
+  function showWeather(response) {
+    setWeather({
+      temperature: response.data.main.temp,
+      icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      description: response.data.weather[0].description,
+      feelsLike: response.data.main.feels_like,
+      wind: response.data.wind.speed,
+      humidity: response.data.main.humidity,
+      pressure: response.data.main.pressure,
+      tempMax: response.data.main.temp_max,
+      tempMin: response.data.main.temp_min,
+    });
+  }
+
+  function updateCity(event) {
+    setCity(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`;
+    axios.get(apiUrl).then(showWeather);
+  }
 
   return (
     <div className="Weather">
       <header className="search-engine-section">
-        <form id="search-engine">
+        <form id="search-engine" onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-7">
               <input
@@ -30,6 +43,7 @@ export default function WeatherSummary() {
                 autoFocus="on"
                 autoComplete="off"
                 id="search-input"
+                onChange={updateCity}
               />
             </div>
 
@@ -59,16 +73,16 @@ export default function WeatherSummary() {
       <div className="row">
         <div className="col-8">
           <ul className="summary">
-            <li>{weatherData.city}</li>
+            <li>{city}</li>
             <li>
-              <span>{weatherData.temperature}</span>
+              <span>{Math.round(weather.temperature)}</span>
               <span className="degrees">
                 <a href="/"> °C </a> | <a href="/"> °F </a>
               </span>
             </li>
             <li>
               <div className="last-updated">
-                Last updated: <span>{weatherData.date}</span>
+                Last updated: <span></span>
               </div>
             </li>
           </ul>
@@ -76,11 +90,11 @@ export default function WeatherSummary() {
 
         <div className="col-4">
           <img
-            src={weatherData.imgUrl}
-            alt="weather icon"
+            src={weather.icon}
+            alt={weather.description}
             className="weather-icon"
           />
-          <div className="description">{weatherData.description}</div>
+          <div className="description">{weather.description}</div>
         </div>
       </div>
 
@@ -91,22 +105,11 @@ export default function WeatherSummary() {
           <div className="col-4">
             <ul className="details">
               <li>
-                Feels like:
-                <span> {weatherData.feelsLike}</span>°C
+                Feels like: {""}
+                <span>{Math.round(weather.feelsLike)}</span>°C
               </li>
               <li>
-                Wind Speed: <span>{weatherData.wind}</span> km/h
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-4">
-            <ul className="details">
-              <li>
-                Humidity: <span>{weatherData.humidity}</span>%
-              </li>
-              <li>
-                Pressure: <span>{weatherData.pressure}</span> mb
+                Wind Speed: <span>{Math.round(weather.wind)}</span> km/h
               </li>
             </ul>
           </div>
@@ -114,10 +117,21 @@ export default function WeatherSummary() {
           <div className="col-4">
             <ul className="details">
               <li>
-                Max Temperature: <span>{weatherData.maxTemp}</span>°C
+                Humidity: <span>{weather.humidity}</span>%
               </li>
               <li>
-                Min Temperature: <span>{weatherData.minTemp}</span>°C
+                Pressure: <span>{weather.pressure}</span> mb
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-4">
+            <ul className="details">
+              <li>
+                Max Temperature: <span>{Math.round(weather.tempMax)}</span>°C
+              </li>
+              <li>
+                Min Temperature: <span>{Math.round(weather.tempMin)}</span>°C
               </li>
             </ul>
           </div>
