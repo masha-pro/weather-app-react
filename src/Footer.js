@@ -5,7 +5,7 @@ export default function DailyForecast() {
     <footer>
       <div>
         <a
-          href="https://github.com/masha-pro/weather-app.git"
+          href="https://github.com/masha-pro/weather-app-react.git"
           target="_blank"
           rel="noreferrer"
         >

@@ -1,6 +1,7 @@
 .Weather .search-button {
-  padding: 6px 15px;
+  padding: 6px 14px;
 }
+
 .Weather ul.summary {
   font-size: 46px;
   font-weight: 500;

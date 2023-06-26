@@ -20,123 +20,120 @@ export default function WeatherSummary() {
     });
   }
 
-  function updateCity(event) {
-    setCity(event.target.value);
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`;
     axios.get(apiUrl).then(showWeather);
   }
 
-  return (
-    <div className="Weather">
-      <header className="search-engine-section">
-        <form id="search-engine" onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-7">
-              <input
-                type="search"
-                className="form-control"
-                placeholder="🔍 Search City"
-                autoFocus="on"
-                autoComplete="off"
-                id="search-input"
-                onChange={updateCity}
-              />
-            </div>
+  function updateCity(event) {
+    setCity(event.target.value);
+  }
 
-            <div className="col-2">
-              <button
-                type="submit"
-                className="btn btn-warning shadow-sm search-button"
-                id="search-button"
-              >
-                Search
-              </button>
-            </div>
-
-            <div className="col-3">
-              <button
-                type="button"
-                className="btn btn-danger shadow-sm search-button"
-                id="current-location-button"
-              >
-                Current city
-              </button>
-            </div>
-          </div>
-        </form>
-      </header>
-
-      <div className="row">
-        <div className="col-8">
-          <ul className="summary">
-            <li>{city}</li>
-            <li>
-              <span>{Math.round(weather.temperature)}</span>
-              <span className="degrees">
-                <a href="/"> °C </a> | <a href="/"> °F </a>
-              </span>
-            </li>
-            <li>
-              <div className="last-updated">
-                Last updated: <span></span>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div className="col-4">
-          <img
-            src={weather.icon}
-            alt={weather.description}
-            className="weather-icon"
-          />
-          <div className="description">{weather.description}</div>
-        </div>
-      </div>
-
-      <hr />
-
-      <div className="WeatherDetails">
+  let search = (
+    <header className="search-engine-section">
+      <form id="search-engine" onSubmit={handleSubmit}>
         <div className="row">
-          <div className="col-4">
-            <ul className="details">
+          <div className="col-10">
+            <input
+              type="search"
+              className="form-control"
+              placeholder="🔍 Search City"
+              autoFocus="on"
+              autoComplete="off"
+              id="search-input"
+              onChange={updateCity}
+            />
+          </div>
+
+          <div className="col-2">
+            <button
+              type="submit"
+              className="btn btn-warning shadow-sm search-button"
+              id="search-button"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </header>
+  );
+
+  if (weather) {
+    return (
+      <div className="Weather">
+        {search}
+        <div className="row">
+          <div className="col-8">
+            <ul className="summary">
+              <li>{city}</li>
               <li>
-                Feels like: {""}
-                <span>{Math.round(weather.feelsLike)}</span>°C
+                <span>{Math.round(weather.temperature)}</span>
+                <span className="degrees">
+                  <a href="/"> °C </a> | <a href="/"> °F </a>
+                </span>
               </li>
               <li>
-                Wind Speed: <span>{Math.round(weather.wind)}</span> km/h
+                <div className="last-updated">
+                  Last updated: <span>Monday 15:00</span>
+                </div>
               </li>
             </ul>
           </div>
 
           <div className="col-4">
-            <ul className="details">
-              <li>
-                Humidity: <span>{weather.humidity}</span>%
-              </li>
-              <li>
-                Pressure: <span>{weather.pressure}</span> mb
-              </li>
-            </ul>
+            <img
+              src={weather.icon}
+              alt={weather.description}
+              className="weather-icon"
+            />
+            <div className="description">{weather.description}</div>
           </div>
+        </div>
 
-          <div className="col-4">
-            <ul className="details">
-              <li>
-                Max Temperature: <span>{Math.round(weather.tempMax)}</span>°C
-              </li>
-              <li>
-                Min Temperature: <span>{Math.round(weather.tempMin)}</span>°C
-              </li>
-            </ul>
+        <hr />
+
+        <div className="WeatherDetails">
+          <div className="row">
+            <div className="col-4">
+              <ul className="details">
+                <li>
+                  Feels like: {""}
+                  <span>{Math.round(weather.feelsLike)}</span>°C
+                </li>
+                <li>
+                  Wind Speed: <span>{Math.round(weather.wind)}</span> km/h
+                </li>
+              </ul>
+            </div>
+
+            <div className="col-4">
+              <ul className="details">
+                <li>
+                  Humidity: <span>{weather.humidity}</span>%
+                </li>
+                <li>
+                  Pressure: <span>{weather.pressure}</span> mb
+                </li>
+              </ul>
+            </div>
+
+            <div className="col-4">
+              <ul className="details">
+                <li>
+                  Max Temperature: <span>{Math.round(weather.tempMax)}</span>°C
+                </li>
+                <li>
+                  Min Temperature: <span>{Math.round(weather.tempMin)}</span>°C
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <div>{search}</div>;
+  }
 }
