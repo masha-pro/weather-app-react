@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Weather.css";
 import axios from "axios";
 
-export default function WeatherSummary() {
+export default function Weather() {
   let [city, setCity] = useState("Kharkiv");
   let [weather, setWeather] = useState("");
 
