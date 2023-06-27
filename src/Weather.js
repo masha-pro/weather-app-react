@@ -67,7 +67,7 @@ export default function Weather() {
         <div className="row">
           <div className="col-8">
             <ul className="summary">
-              <li>{city}</li>
+              <li className="current-city">{city}</li>
               <li>
                 <span>{Math.round(weather.temperature)}</span>
                 <span className="degrees">
