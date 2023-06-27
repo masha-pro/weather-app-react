@@ -1,141 +1,111 @@
 import React, { useState } from "react";
-import "./Weather.css";
 import axios from "axios";
+import "./Weather.css";
 
-export default function Weather() {
-  let [city, setCity] = useState("Kharkiv");
-  let [weather, setWeather] = useState("");
+export default function Weather(props) {
+  const [weather, setWeather] = useState({ ready: false });
 
   function showWeather(response) {
     setWeather({
-      temperature: response.data.main.temp,
-      icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-      description: response.data.weather[0].description,
-      feelsLike: response.data.main.feels_like,
+      ready: true,
+      city: response.data.city,
+      temperature: response.data.temperature.current,
+      icon: response.data.condition.icon_url,
+      description: response.data.condition.description,
+      feelsLike: response.data.temperature.feels_like,
       wind: response.data.wind.speed,
-      humidity: response.data.main.humidity,
-      pressure: response.data.main.pressure,
-      tempMax: response.data.main.temp_max,
-      tempMin: response.data.main.temp_min,
+      humidity: response.data.temperature.humidity,
+      pressure: response.data.temperature.pressure,
     });
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`;
-    axios.get(apiUrl).then(showWeather);
-  }
-
-  function updateCity(event) {
-    setCity(event.target.value);
-  }
-
-  let search = (
-    <header className="search-engine-section">
-      <form id="search-engine" onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-10">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="🔍 Search City"
-              autoFocus="on"
-              autoComplete="off"
-              id="search-input"
-              onChange={updateCity}
-            />
-          </div>
-
-          <div className="col-2">
-            <button
-              type="submit"
-              className="btn btn-warning shadow-sm search-button"
-              id="search-button"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
-    </header>
-  );
-
-  if (weather) {
+  if (weather.ready) {
     return (
       <div className="Weather">
-        {search}
+        <header className="search-engine-section">
+          <form>
+            <div className="row">
+              <div className="col-9">
+                <input
+                  type="search"
+                  className="form-control"
+                  placeholder="🔍 Search City"
+                  autoFocus="on"
+                  autoComplete="off"
+                />
+              </div>
+
+              <div className="col-3">
+                <button
+                  type="submit"
+                  className="btn btn-info shadow search-button w-100"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </header>
+
         <div className="row">
-          <div className="col-8">
-            <ul className="summary">
-              <li className="current-city">{city}</li>
-              <li>
-                <span>{Math.round(weather.temperature)}</span>
+          <div className="col-4">
+            <div className="current-city">{weather.city}</div>
+            <ul className="weather-summary">
+              <li className="temp">
+                {Math.round(weather.temperature)}
                 <span className="degrees">
                   <a href="/"> °C </a> | <a href="/"> °F </a>
                 </span>
               </li>
+              <li className="last-updated">Last updated: Monday 15:00</li>
+            </ul>
+          </div>
+
+          <div className="col-4">
+            <ul className="weather-details">
               <li>
-                <div className="last-updated">
-                  Last updated: <span>Monday 15:00</span>
-                </div>
+                Feels like: {""}
+                <span className="accent">
+                  {Math.round(weather.feelsLike)}°C{" "}
+                </span>
+              </li>
+              <li>
+                Wind:{" "}
+                <span className="accent">{Math.round(weather.wind)} km/h </span>
+              </li>
+              <li>
+                Humidity: <span className="accent">{weather.humidity}% </span>
+              </li>
+              <li>
+                Pressure: <span className="accent">{weather.pressure} mb </span>
               </li>
             </ul>
           </div>
 
           <div className="col-4">
-            <img
-              src={weather.icon}
-              alt={weather.description}
-              className="weather-icon"
-            />
-            <div className="description">{weather.description}</div>
+            <ul className="weather-description">
+              <li>
+                <img
+                  src={weather.icon}
+                  alt={weather.description}
+                  className="weather-icon"
+                />
+              </li>
+
+              <li className="current-description">
+                <div>{weather.description}</div>
+              </li>
+            </ul>
           </div>
         </div>
 
         <hr />
-
-        <div className="WeatherDetails">
-          <div className="row">
-            <div className="col-4">
-              <ul className="details">
-                <li>
-                  Feels like: {""}
-                  <span>{Math.round(weather.feelsLike)}</span>°C
-                </li>
-                <li>
-                  Wind Speed: <span>{Math.round(weather.wind)}</span> km/h
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-4">
-              <ul className="details">
-                <li>
-                  Humidity: <span>{weather.humidity}</span>%
-                </li>
-                <li>
-                  Pressure: <span>{weather.pressure}</span> mb
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-4">
-              <ul className="details">
-                <li>
-                  Max Temperature: <span>{Math.round(weather.tempMax)}</span>
-                  °C
-                </li>
-                <li>
-                  Min Temperature: <span>{Math.round(weather.tempMin)}</span>
-                  °C
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
     );
   } else {
-    return <div>{search}</div>;
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=93co25d01feb2baacba3f4a1c2ate2b7`;
+    axios.get(apiUrl).then(showWeather);
+
+    return "Loading...";
   }
 }
