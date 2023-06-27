@@ -12,10 +12,6 @@
   line-height: 1.2;
 }
 
-.Weather ul.summary .current-city {
-  text-transform: capitalize;
-}
-
 .Weather .degrees {
   font-size: 20px;
   position: relative;

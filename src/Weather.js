@@ -122,10 +122,12 @@ export default function Weather() {
             <div className="col-4">
               <ul className="details">
                 <li>
-                  Max Temperature: <span>{Math.round(weather.tempMax)}</span>°C
+                  Max Temperature: <span>{Math.round(weather.tempMax)}</span>
+                  °C
                 </li>
                 <li>
-                  Min Temperature: <span>{Math.round(weather.tempMin)}</span>°C
+                  Min Temperature: <span>{Math.round(weather.tempMin)}</span>
+                  °C
                 </li>
               </ul>
             </div>
