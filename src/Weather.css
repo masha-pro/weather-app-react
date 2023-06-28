@@ -53,6 +53,7 @@ footer {
 .Weather .temp {
   position: relative;
   top: 12px;
+  right: 5px;
 }
 
 .Weather .temp-value {
@@ -70,12 +71,12 @@ footer {
 @media (max-width: 576px) {
   .Weather .form-control,
   .Weather .search-button {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .Weather .current-city,
   .Weather .temp-value {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .Weather .temp {
