@@ -52,12 +52,12 @@ footer {
 
 .Weather .temp {
   position: relative;
-  top: 12px;
+  top: 18px;
   right: 5px;
 }
 
 .Weather .temp-value {
-  font-size: 46px;
+  font-size: 64px;
   font-weight: 600;
 }
 
@@ -65,7 +65,7 @@ footer {
   font-size: 18px;
   font-weight: 700;
   position: relative;
-  bottom: 21px;
+  bottom: 34px;
 }
 
 @media (max-width: 576px) {
