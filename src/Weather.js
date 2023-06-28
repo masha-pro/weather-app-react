@@ -38,7 +38,7 @@ export default function Weather(props) {
               <div className="col-3">
                 <button
                   type="submit"
-                  className="btn btn-info shadow search-button w-100"
+                  className="btn btn-warning shadow search-button w-100"
                 >
                   Search
                 </button>
@@ -47,55 +47,42 @@ export default function Weather(props) {
           </form>
         </header>
 
-        <div className="row">
-          <div className="col-4">
-            <div className="current-city">{weather.city}</div>
-            <ul className="weather-summary">
-              <li className="temp">
-                {Math.round(weather.temperature)}
-                <span className="degrees">
-                  <a href="/"> °C </a> | <a href="/"> °F </a>
-                </span>
-              </li>
-              <li className="last-updated">Last updated: Monday 15:00</li>
-            </ul>
-          </div>
+        <div className="current-weather">
+          <div className="row">
+            <div className="col-6">
+              <div className="current-city">{weather.city}</div>
+              <ul className="weather-description">
+                <li className="date">
+                  Monday 15:00, <span>{weather.description}</span>
+                </li>
+                <li>
+                  Wind:{" "}
+                  <span className="accent">
+                    {Math.round(weather.wind)} km/h{" "}
+                  </span>
+                  , Humidity:{" "}
+                  <span className="accent">{weather.humidity}% </span>
+                </li>
+              </ul>
+            </div>
 
-          <div className="col-4">
-            <ul className="weather-details">
-              <li>
-                Feels like: {""}
-                <span className="accent">
-                  {Math.round(weather.feelsLike)}°C{" "}
-                </span>
-              </li>
-              <li>
-                Wind:{" "}
-                <span className="accent">{Math.round(weather.wind)} km/h </span>
-              </li>
-              <li>
-                Humidity: <span className="accent">{weather.humidity}% </span>
-              </li>
-              <li>
-                Pressure: <span className="accent">{weather.pressure} mb </span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-4">
-            <ul className="weather-description">
-              <li>
+            <div className="col-6 d-flex justify-content-end">
+              <div className="weather-summary">
                 <img
                   src={weather.icon}
                   alt={weather.description}
                   className="weather-icon"
-                />
-              </li>
-
-              <li className="current-description">
-                <div>{weather.description}</div>
-              </li>
-            </ul>
+                />{" "}
+                <span className="temp">
+                  <span className="temp-value">
+                    {Math.round(weather.temperature)}
+                  </span>
+                  <span className="degrees">
+                    <a href="/"> °C </a> | <a href="/"> °F </a>
+                  </span>{" "}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
