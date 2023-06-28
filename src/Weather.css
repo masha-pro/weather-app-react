@@ -36,32 +36,32 @@ footer {
 .weather-description {
   font-size: 14px;
   list-style: none;
-  line-height: 1.4;
+  line-height: 1.5;
   opacity: 0.7;
   padding: 0;
 }
 
- .accent {
+.accent {
   color: var(--accent-color);
   font-weight: 700;
 }
 
- .weather-icon {
+.weather-icon {
   width: 130px;
 }
 
- .temp {
+.temp {
   position: relative;
   top: 18px;
   right: 5px;
 }
 
- .temp-value {
+.temp-value {
   font-size: 64px;
   font-weight: 600;
 }
 
- .degrees {
+.unit {
   font-size: 18px;
   font-weight: 700;
   position: relative;
@@ -69,30 +69,30 @@ footer {
 }
 
 @media (max-width: 576px) {
-   .form-control,
-   .search-button {
+  .form-control,
+  .search-button {
     font-size: 10px;
   }
 
-   .current-city,
-   .temp-value {
+  .current-city,
+  .temp-value {
     font-size: 24px;
   }
 
-   .temp {
+  .temp {
     top: 5px;
   }
 
-   .degrees {
+  .degrees {
     font-size: 10px;
     bottom: 15px;
   }
 
-   .weather-description {
+  .weather-description {
     font-size: 10px;
   }
 
-   .weather-icon {
+  .weather-icon {
     width: 80px;
   }
 
