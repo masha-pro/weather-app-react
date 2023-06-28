@@ -4,14 +4,27 @@ export default function DailyForecast() {
   return (
     <footer>
       <div>
+        The project was coded by{" "}
+        <a
+          href="https://www.linkedin.com/in/mpavlenko-pm/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Mariia Pavlenko
+        </a>
+        , is{" "}
         <a
           href="https://github.com/masha-pro/weather-app-react.git"
           target="_blank"
           rel="noreferrer"
         >
-          Open-source code
+          open-sourced on GitHub
+        </a>{" "}
+        and{" "}
+        <a href="https://react-weather-app-mashapro.netlify.app/">
+          hosted on Netlify
         </a>
-        <span> by Mariia Pavlenko</span>
+        .
       </div>
     </footer>
   );
