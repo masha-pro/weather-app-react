@@ -22,11 +22,7 @@ hr {
   margin: 0px auto;
 }
 
-footer {
-  font-size: 12px;
-  margin-top: 10px;
-  font-weight: 300;
-}
+
 
 .search-engine {
   margin-bottom: 10px;
@@ -88,9 +84,9 @@ footer {
     top: 5px;
   }
 
-  .degrees {
+  .unit {
     font-size: 10px;
-    bottom: 15px;
+    bottom: 10px;
   }
 
   .weather-description {
