@@ -23,17 +23,17 @@ footer {
   font-weight: 300;
 }
 
-.Weather .search-engine-section {
+.search-engine {
   margin-bottom: 10px;
 }
 
-.Weather .current-city {
+.current-city {
   font-size: 46px;
   font-weight: 600;
   text-transform: capitalize;
 }
 
-.Weather .weather-description {
+.weather-description {
   font-size: 14px;
   list-style: none;
   line-height: 1.4;
@@ -41,27 +41,27 @@ footer {
   padding: 0;
 }
 
-.Weather .accent {
+ .accent {
   color: var(--accent-color);
   font-weight: 700;
 }
 
-.Weather .weather-icon {
+ .weather-icon {
   width: 130px;
 }
 
-.Weather .temp {
+ .temp {
   position: relative;
   top: 18px;
   right: 5px;
 }
 
-.Weather .temp-value {
+ .temp-value {
   font-size: 64px;
   font-weight: 600;
 }
 
-.Weather .degrees {
+ .degrees {
   font-size: 18px;
   font-weight: 700;
   position: relative;
@@ -69,30 +69,30 @@ footer {
 }
 
 @media (max-width: 576px) {
-  .Weather .form-control,
-  .Weather .search-button {
+   .form-control,
+   .search-button {
     font-size: 10px;
   }
 
-  .Weather .current-city,
-  .Weather .temp-value {
+   .current-city,
+   .temp-value {
     font-size: 24px;
   }
 
-  .Weather .temp {
+   .temp {
     top: 5px;
   }
 
-  .Weather .degrees {
+   .degrees {
     font-size: 10px;
     bottom: 15px;
   }
 
-  .Weather .weather-description {
+   .weather-description {
     font-size: 10px;
   }
 
-  .Weather .weather-icon {
+   .weather-icon {
     width: 80px;
   }
 
